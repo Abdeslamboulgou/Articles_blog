@@ -50,8 +50,8 @@
             <label for="file-input">Image:</label>
           </b-col>
           <b-col sm="6" class="user_champs">
-            <b-form-file @change="onSelectedImage" name="picture" id="file-input" accept="image/*"
-              v-model="user.picture"></b-form-file>
+            <b-form-file @change="onSelectedImage($event)" ref="file" name="picture" id="file-input" accept="image/*"
+              v-model="user['picture']"></b-form-file>
 
           </b-col>
         </b-row>
@@ -120,15 +120,15 @@ export default {
     },
 
 
-    onSelectedImage(event) {
-      this.user['picture'] = event.target.files[0];
+    onSelectedImage() {
+      this.user['picture'] = this.$refs.files[0];
       console.log(this.user['picture'])
     },
 
     addUser() {
 
       let data = new FormData();
-      data.append('picture', this.user['picture'], this.user['picture'].name);
+      data.append('picture', this.user['picture']);
       data.append('title', this.user['title']);
       data.append('firstName', this.user['firstName']);
       data.append('lastName', this.user['lastName']);
@@ -136,7 +136,7 @@ export default {
       axios.post('https://dummyapi.io/data/v1/user/create', this.user, {
         headers: {
           'app-id': '635bd2ac4c0fb34c55a2523b',
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 
         }
       })

@@ -48,10 +48,15 @@
                             <b-form-input id="prenom" name="lastName" v-model="comment.owner['lastName']"
                                 placeholder="Prénom"></b-form-input>
                         </b-col>
+                        <b-col style=" visibility: hidden;" sm="6">
+                            <label for="post">Post*</label>
+                            <b-form-input id="post" name="post" v-model="$props['post']"
+                                ></b-form-input>
+                        </b-col>
                         <b-col sm="12">
                             <label for="file-input">Image*</label>
                             <b-form-file v-model="comment.owner['picture']" accept="image/*" @change="onSelectedImage"
-                                name="picture" id="file-input" class="mb-2"></b-form-file>
+                                name="picture" id="file-input"  class="mb-2" enctype="multipart/form-data" ></b-form-file>
 
                         </b-col>
                         <b-col sm="12">
@@ -130,8 +135,7 @@ export default {
             axios.post('https://dummyapi.io/data/v1/comment/create', this.comment, {
                 headers: {
                     'app-id': '635bd2ac4c0fb34c55a2523b',
-                    'cache-control': "private",
-                    'content-type': "application/json; charset=utf-8"
+                    'Content-Type': 'application/json charset=utf-8'
                 }
             })
 

@@ -12,7 +12,7 @@ const routes = [
 
     {
         name: 'users',
-        path: '/',
+        path: '',
         component:  ListUsers
     },
     {
